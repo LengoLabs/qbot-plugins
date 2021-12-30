@@ -37,17 +37,19 @@ class ViewSuspensionsCommand extends Command {
 
     async run(ctx: CommandContext) {
         if(!config.database.enabled) return ctx.reply({ embeds: [ getUnexpectedErrorEmbed() ] });
-
+        let isThere;
         const suspensions = await provider.findSuspendedUsers();
         let mainEmbed = new MessageEmbed();
         mainEmbed.setTimestamp();
         mainEmbed.setColor(mainColor);
         mainEmbed.setTitle('Current Suspensions');
         for (var i in suspensions) {
+            isThere = true;
             const user = await robloxClient.getUser(suspensions[i].robloxId);
 
             mainEmbed.addField(user.name,`Expires on ${suspensions[i].suspendedUntil.toDateString()}`);
         }
+        if (isThere == false) mainEmbed.setDescription("**No Current Suspensions!**");
         return ctx.reply({embeds: [mainEmbed]});
     }
 }
