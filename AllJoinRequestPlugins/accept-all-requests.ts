@@ -43,9 +43,10 @@ class AcceptAllJoinRequestsCommand extends Command {
         mainEmbed.setDescription(`Successfully accept **${joinRequests.data.length}** join requests!`);
 
         joinRequests.data.forEach(async (request) => {
-            console.log(request['requester'].userId)
             try {
+                  setTimeout(function(){
                 await robloxGroup.acceptJoinRequest(request['requester'].userId);
+                  }, 1000);
             } catch (e) {
                 return ctx.reply({ embeds: [await getUnexpectedErrorEmbed()]});
             }
