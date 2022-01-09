@@ -42,12 +42,12 @@ class DenyAllJoinRequestsCommand extends Command {
         mainEmbed.setTimestamp();
         mainEmbed.setDescription(`Successfully declined **${joinRequests.data.length}** join requests!`);
 
-        joinRequests.data.forEach(async (request) => {
+        joinRequests.data.forEach(async (request, index) => {
             console.log(request['requester'].userId)
             try {
                   setTimeout(function(){
                 await robloxGroup.declineJoinRequest(request['requester'].userId);
-                  }, 1000);
+                  }, index * 1000);
             } catch (e) {
                 return ctx.reply({ embeds: [await getUnexpectedErrorEmbed()]});
             }
