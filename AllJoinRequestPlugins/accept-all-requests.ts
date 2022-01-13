@@ -44,7 +44,7 @@ class AcceptAllJoinRequestsCommand extends Command {
 
         joinRequests.data.forEach(async (request, index) => {
             try {
-                  setTimeout(function(){
+                  setTimeout(async function(){
                 await robloxGroup.acceptJoinRequest(request['requester'].userId);
                   }, 1000 * index);
             } catch (e) {
