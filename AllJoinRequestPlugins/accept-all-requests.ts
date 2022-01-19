@@ -34,7 +34,7 @@ class AcceptAllJoinRequestsCommand extends Command {
     }
 
     async run(ctx: CommandContext) {
-        const joinRequests = await robloxGroup.getJoinRequests({limit: 100}); 
+        const joinRequests = await robloxGroup.getJoinRequests({ limit: 100 }); 
         
         let mainEmbed = new MessageEmbed();
         mainEmbed.setColor(greenColor);
