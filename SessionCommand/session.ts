@@ -11,7 +11,7 @@ class SessionCommand extends Command {
             trigger: 'session',
             description: 'Announces a session in both this server and the group.',
             type: 'ChatInput',
-            module: 'information',
+            module: 'sessions',
             permissions: [
                 {
                     type: 'role',
