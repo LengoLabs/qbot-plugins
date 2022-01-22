@@ -1,0 +1,55 @@
+import { discordClient, robloxGroup } from '../../main';
+import { CommandContext } from '../../structures/addons/CommandAddons';
+import { Command } from '../../structures/Command';
+import { checkIconUrl, getRoleListEmbed, greenColor, mainColor, quoteIconUrl } from '../../handlers/locale';
+import { config } from '../../config';
+import { TextChannel } from 'discord.js';
+
+class PageCommand extends Command {
+    constructor() {
+        super({
+            trigger: 'page',
+            description: 'Allows you to page roles in you server.',
+            type: 'ChatInput',
+            module: 'admin',
+            permissions: [
+                {
+                    type: 'role',
+                    ids: config.permissions.admin,
+                    value: true,
+                }
+            ]
+        });
+    }
+
+    async run(ctx: CommandContext) {
+        const channel = await discordClient.channels.fetch('Channel ID Here') as TextChannel;
+        channel.send({
+          content: '<@&ROLEID HERE>',
+            embeds: [
+                {
+                    author: {
+                        name: 'Page Notification',
+                        iconURL: quoteIconUrl,
+                    },
+                    description: 'Discord Text Here',
+                    color: greenColor,
+                }
+            ]
+        });
+        return ctx.reply({
+            embeds: [
+                {
+                    author: {
+                        name: 'Page Successfull',
+                        iconURL: checkIconUrl,
+                    },
+                    description: 'You have successfully paged!',
+                    color: greenColor,
+                }
+            ]
+        });
+    }
+}
+
+export default PageCommand;
