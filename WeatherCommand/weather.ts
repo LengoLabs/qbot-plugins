@@ -8,7 +8,12 @@ import {
     getCommandInfoEmbed,
     getCommandListEmbed,
     getCommandNotFoundEmbed,
+    mainColor,
 } from '../../handlers/locale';
+import { xmarkIconUrl } from '../../handlers/locale';
+import { greenColor } from '../../handlers/locale';
+import { redColor } from '../../handlers/locale';
+import { infoIconUrl } from '../../handlers/locale';
 
 class WeatherCommand extends Command {
     constructor() {
@@ -30,35 +35,25 @@ class WeatherCommand extends Command {
     }
 
     async run(ctx: CommandContext) {
-
-    
-        if(ctx.args.length === 0){
-            let errorembed = new MessageEmbed()
-            .setTitle("Error:")
-            .setDescription("❌ Please enter a location!")
-            .setColor('#de554e')
-            .setTimestamp();
-                return ctx.reply({ embeds: [errorembed] });
-        }
         
         weather.find({ search: ctx.args['state'], degreeType: 'C'}, function(err, result, lenght) {
           
         if(result.length === 0){
-            let errorembed = new MessageEmbed()
-            .setTitle("Error:")
-            .setDescription("❌ Please enter a vaild location!")
-            .setColor('#de554e')
+            let noresultsEmbed = new MessageEmbed()
+            .setAuthor(`Invalid State`, xmarkIconUrl)
+            .setDescription(`Please enter a vaild location!`)
+            .setColor(redColor)
             .setTimestamp();
-                return ctx.reply({ embeds: [errorembed] });
+                return ctx.reply({ embeds: [noresultsEmbed] });
         }
         
           var current = result[0].current;
           var location = result[0].location;
             if (err) {
             let errorembed = new MessageEmbed()
-            .setTitle("Error:")
-            .setDescription("❌ Please enter a vaild location!")
-            .setColor('#de554e')
+            .setAuthor(`Error`, xmarkIconUrl)
+            .setDescription(`An error has occurred!`)
+            .setColor(redColor)
             .setTimestamp();
                 return ctx.reply({ embeds: [errorembed] });
             }
@@ -66,9 +61,9 @@ class WeatherCommand extends Command {
             
             let embed = new MessageEmbed()
             .setDescription(`**${current.skytext}**`)
-            .setAuthor(`Weather for ${current.observationpoint}`)
+            .setAuthor(`Weather for ${current.observationpoint}`, infoIconUrl)
             .setThumbnail(current.imageUrl)
-            .setColor('#43d177')
+            .setColor(mainColor)
             .addField('Timezone', `UTC${location.timezone}`, true)
             .addField('Degree Type', location.degreetype, true)
             .addField('Temperature', `${current.temperature} Degrees`, true)
