@@ -81,4 +81,4 @@ class WeatherCommand extends Command {
     }
 }
 
-export default WeatherCommand;;
+export default WeatherCommand;
