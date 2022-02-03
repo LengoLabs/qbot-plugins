@@ -19,13 +19,13 @@ class WeatherCommand extends Command {
     constructor() {
         super({
             trigger: 'weather',
-            description: 'Gets the current weather from the state.',
+            description: 'Gets the current weather from the location.',
             type: 'ChatInput',
-            module: 'miscellaneous',
+            module: 'information',
             args: [
               {
-                    trigger: 'state',
-                    description: 'The state that you want to get the current weather from.',
+                    trigger: 'location',
+                    description: 'The location that you want to get the current weather from.',
                     isLegacyFlag: false,
                     required: true,
                     type: 'String',
