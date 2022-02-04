@@ -36,11 +36,11 @@ class WeatherCommand extends Command {
 
     async run(ctx: CommandContext) {
         
-        weather.find({ search: ctx.args['state'], degreeType: 'C'}, function(err, result, lenght) {
+        weather.find({ search: ctx.args['location'], degreeType: 'C'}, function(err, result, lenght) {
           
         if(result.length === 0){
             let noresultsEmbed = new MessageEmbed()
-            .setAuthor(`Invalid State`, xmarkIconUrl)
+            .setAuthor(`Invalid Location`, xmarkIconUrl)
             .setDescription(`Please enter a vaild location!`)
             .setColor(redColor)
             .setTimestamp();
