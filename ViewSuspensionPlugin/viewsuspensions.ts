@@ -49,7 +49,7 @@ class ViewSuspensionsCommand extends Command {
 
             mainEmbed.addField(user.name,`Expires on ${suspensions[i].suspendedUntil.toDateString()}`);
         }
-        if (isThere == false) mainEmbed.setDescription("**No Current Suspensions!**");
+        if (!isThere) mainEmbed.setDescription("**No Current Suspensions!**");
         return ctx.reply({embeds: [mainEmbed]});
     }
 }
