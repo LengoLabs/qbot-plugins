@@ -24,23 +24,28 @@ class SuggestionCommand extends Command {
     }
 
     async run(ctx: CommandContext) {
-      const channel = await discordClient.channels.fetch('YOUR SUGGESTION CHANNEL') as TextChannel;
+      const channel = await discordClient.channels.fetch('886587818049171487') as TextChannel;
       channel.send({
-            embeds: [
-              {
-                author: {
-                    name: 'Suggestion',
-                    },
-                description: (ctx.args['suggestion']),
-                color: mainColor,
-                timestamp: new Date(),
-                footer: {
-                    text: `Suggested by: ${ctx.user.tag}`,
-                    iconURL: ctx.user.displayAvatarURL({dynamic: true})
-              },
-            }
-          ]
-      });
+             embeds: [
+               {
+                 author: {
+                     name: 'Suggestion',
+                     },
+                 description: (ctx.args['suggestion']),
+                 color: mainColor,
+                 timestamp: new Date(),
+                 footer: {
+                     text: `Suggested by: ${ctx.user.tag}`,
+                     iconURL: ctx.user.displayAvatarURL({dynamic: true})
+               },
+             }
+           ]
+       }).then(sentMessage => {
+        sentMessage.react('👍')
+        sentMessage.react('🤷')
+        sentMessage.react('👎')
+        sentMessage.startThread({ name: 'Suggestion', autoArchiveDuration: 1440, reason: 'Because someone send a suggestion.' })
+      }).catch(console.error);
       
       return ctx.reply({
         embeds: [
@@ -52,9 +57,9 @@ class SuggestionCommand extends Command {
             description: 'You Successfully suggested a suggestion.',
             color: greenColor,
           }
-        ]
-      })
-    }
-}
+         ]
+       })
+     }
+ }
 
 export default SuggestionCommand;
