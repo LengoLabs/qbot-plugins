@@ -54,7 +54,7 @@ class SuggestionCommand extends Command {
               name: 'Success!',
               iconURL: checkIconUrl,
             },
-            description: 'You Successfully suggested a suggestion.',
+            description: 'Your suggestion has been sent successfully!',
             color: greenColor,
           }
          ]
