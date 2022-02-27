@@ -24,7 +24,7 @@ class SuggestionCommand extends Command {
     }
 
     async run(ctx: CommandContext) {
-      const channel = await discordClient.channels.fetch('886587818049171487') as TextChannel;
+      const channel = await discordClient.channels.fetch('YOUR SUGGESTION CHANNEL') as TextChannel;
       channel.send({
              embeds: [
                {
