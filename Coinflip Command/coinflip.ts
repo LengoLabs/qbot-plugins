@@ -1,7 +1,7 @@
 import { CommandContext } from '../../structures/addons/CommandAddons';
 import { Command } from '../../structures/Command';
 import { MessageEmbed, Message } from 'discord.js';
-import { mainColor } from '../../handlers/locale';
+import { infoIconUrl, mainColor } from '../../handlers/locale';
 
 class CoinflipCommand extends Command {
     constructor() {
@@ -32,12 +32,12 @@ const result = new MessageEmbed()
       .setDescription('**Flipped Coin**')
       .setImage(coinURL)
       .setColor(mainColor)
+      .setFooter(coinflip)
+      .setTimestamp()
 
 const flippingCoin = new MessageEmbed()
       .setDescription('**Flipping Coin...**')
       .setColor(mainColor)
-      .setFooter(coinflip)
-      .setTimestamp()
       
       let msg = await ctx.reply({ embeds: [flippingCoin], fetchReply: true }).then(msg => setTimeout(() => (msg as Message).edit({ embeds: [result] }), 5000));
       
