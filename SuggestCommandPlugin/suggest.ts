@@ -41,10 +41,11 @@ class SuggestionCommand extends Command {
              }
            ]
        }).then(sentMessage => {
-        sentMessage.react('👍')
-        sentMessage.react('🤷')
-        sentMessage.react('👎')
-        sentMessage.startThread({ name: 'Suggestion', autoArchiveDuration: 1440, reason: 'Because someone send a suggestion.' })
+        sentMessage
+        .react('👍')
+        .react('🤷')
+        .react('👎')
+        .startThread({ name: 'Suggestion', autoArchiveDuration: 1440, reason: 'Because someone send a suggestion.' })
       }).catch(console.error);
       
       return ctx.reply({
